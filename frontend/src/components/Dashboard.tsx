@@ -12,10 +12,21 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 /**
- * Dashboard – Übersichtsseite mit echten Daten.
+ * Dashboard – Übersichtsseite der Anwendung.
  *
- * Zeigt dynamische Statistiken basierend auf den echten Tasks aus dem Backend
- * und integriert direkt die TaskList für einen schnellen Überblick.
+ * Diese Seite dient als Einstiegspunkt und zeigt auf einen Blick:
+ * - Dynamische Statistiken (QuickStats)
+ * - Eine kompakte Liste der aktuellen Tasks
+ *
+ * Best Practice:
+ * - Dashboard sollte primär informativ sein (Quick Overview)
+ * - Handlungsaufforderungen (z.B. Button) führen zur eigentlichen Arbeitsseite
+ * - Keine doppelte Darstellung von Formularen
+ *
+ * Wichtig zu wissen:
+ * Das Dashboard nutzt denselben useTasks-Hook wie die TaskManagement-Seite.
+ * Dadurch ist der State überall konsistent. Die Statistiken werden
+ * live aus dem tasks-Array berechnet – kein Hardcoding.
  */
 export default function Dashboard() {
     const navigate = useNavigate();

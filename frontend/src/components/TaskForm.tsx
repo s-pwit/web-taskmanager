@@ -20,8 +20,20 @@ interface TaskFormProps {
 /**
  * TaskForm – Formular zum Erstellen und Bearbeiten von Tasks.
  *
- * Unterstützt sowohl den Create- als auch den Edit-Modus.
- * Wird `task` übergeben, wechselt das Formular automatisch in den Bearbeitungsmodus.
+ * Diese Komponente ist bewusst schlank gehalten und delegiert die gesamte
+ * Logik (State, Validierung, Submit) an den useTaskForm-Hook.
+ *
+ * Best Practice:
+ * - Komponente bleibt präsentational (Dumb Component)
+ * - Alle Logik wird in Custom Hooks ausgelagert
+ * - Wiederverwendbar durch optionales task-Prop
+ *
+ * Wichtig zu wissen:
+ * Das task-Prop wird verwendet, um den Edit-Modus zu aktivieren.
+ * Wird ein Task übergeben, initialisiert der Hook die Formularfelder
+ * automatisch mit den bestehenden Werten. Dadurch entsteht ein
+ * nahtloser Übergang vom "Bearbeiten"-Klick in der Liste zum
+ * vorausgefüllten Formular.
  */
 const TaskForm: React.FC<TaskFormProps> = ({ task, onSaved }) => {
     const {

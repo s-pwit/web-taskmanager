@@ -20,6 +20,24 @@ const theme = createTheme({
     },
 })
 
+/**
+ * App – Einstiegspunkt der gesamten Anwendung.
+ *
+ * Hier wird das zentrale Design-System (Theme) definiert und das Routing eingerichtet.
+ * Alle Seiten (Dashboard und TaskManagement) werden innerhalb eines einheitlichen
+ * Layouts gerendert.
+ *
+ * Best Practice:
+ * - ThemeProvider möglichst hoch in der Komponentenhierarchie platzieren
+ * - CssBaseline für konsistentes Browser-Reset nutzen
+ * - Routing klar und übersichtlich strukturieren
+ *
+ * Wichtig zu wissen:
+ * Durch die zentrale Definition des Themes hier können alle MUI-Komponenten
+ * im gesamten Projekt automatisch das gleiche Design verwenden. Änderungen
+ * am Theme wirken sich global aus – das spart enorm viel Zeit und sorgt
+ * für visuelle Konsistenz.
+ */
 function App() {
     return (
         <ThemeProvider theme={theme}>

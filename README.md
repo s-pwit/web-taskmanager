@@ -1,57 +1,81 @@
-# TaskManager – Vorlesungsprojekt (Termin 6)
+# TaskManager
 
-**Termin 6** – Moderne Frontend-Architektur mit Komponentenbibliotheken
+> Eine moderne Webanwendung zur Verwaltung von Aufgaben – entwickelt als Lernprojekt für betriebliche Webanwendungen mit React und Spring Boot.
 
-## Features (Stand Termin 6)
+Eine übersichtliche und benutzerfreundliche Single-Page-Application (SPA), mit der man Tasks erstellen, bearbeiten, löschen und verwalten kann. Das Projekt zeigt moderne Frontend- und Backend-Architektur in der Praxis.
 
-- **Material UI (MUI) Integration** – Professionelles, konsistentes Design mit zentralem Theme
-- **Responsives Dashboard** – Übersicht mit dynamischen Statistiken (QuickStats)
-- **Vollständige Task-Verwaltung** – Erstellen, Bearbeiten, Löschen von Tasks
-- **Sauberer Edit-Flow** – Klick auf „Bearbeiten“ in der Liste → Formular wird automatisch befüllt
-- **Trennung von Übersicht und Bearbeitung** – Dashboard vs. TaskManagement-Seite
-- **Zentrale State-Verwaltung** – Custom Hooks (`useTasks`, `useTaskForm`) mit `useReducer`
-- **Vollständige Validierung** – Client- und Server-seitige Validierung mit klarer Fehleranzeige
+**Kursaufbau & Entwicklung**  
+Dieses Projekt wurde im Rahmen eines 6-teiligen Kurses entwickelt. Jeder Termin entspricht einem eigenen Git-Branch (`termin-1` bis `termin-6`). Die Anwendung wird Woche für Woche schrittweise erweitert und verbessert – von einer einfachen Grundversion bis hin zu einer professionellen, modernen Webanwendung mit Komponentenbibliothek, sauberer Architektur und responsivem Design.
 
-Dadurch wird die **Datenbindung** (controlled components + einheitliches formData-Modell) und die **Zustandsverwaltung** (explizite Zustandsmaschinen via useReducer) klar und wartbar umgesetzt.
+## ✨ Features
 
-### Good Practice (Termin 6)
+- **Dashboard mit Live-Statistiken** – Übersicht über offene, in Bearbeitung, abgeschlossene und blockierte Tasks
+- **Vollständige Task-Verwaltung** – Erstellen, Bearbeiten und Löschen von Aufgaben
+- **Responsives Design** – Funktioniert auf Desktop und Mobile
+- **Saubere Architektur** – Trennung von Übersicht (Dashboard) und Bearbeitung (TaskManagement)
+- **Zentrale State-Verwaltung** – Wiederverwendbare Custom Hooks mit `useReducer`
+- **Professionelles UI** – Modernes Design mit Material UI
+- **Vollständige Validierung** – Klare Fehleranzeige bei ungültigen Eingaben
 
-- **Single Source of Truth** – Nur eine `useTasks`-Hook-Instanz pro Feature
-- **Controlled Components** – Alle Formularfelder sind kontrolliert
-- **Komponentenbibliothek** – Material UI für Konsistenz und Accessibility
-- **Responsives Design** – MUI Grid mit Breakpoints
-- **Saubere Trennung** – Präsentation (Components) vs. Logik (Hooks)
+### Projektstruktur 
 
-### Wichtig zu wissen
-
-Durch die konsequente Nutzung einer Komponentenbibliothek wie Material UI konnte die Entwicklungszeit für Standard-UI-Elemente drastisch reduziert werden. 
-Gleichzeitig wurde ein einheitliches Design-System etabliert, das Accessibility-Standards erfüllt und bei zukünftigen Erweiterungen konsistent bleibt.
-
-### Projektstruktur (wichtige Dateien Termin 6)
-
-```
+```text
 web-taskmanager/
-├── frontend/                 # React + Vite + TypeScript
-│   ├── src/
-│   │   ├── components/       # UI-Komponenten (Dashboard, TaskForm, TaskList, QuickStats...)
-│   │   ├── hooks/            # Custom Hooks (useTasks, useTaskForm)
-│   │   ├── services/         # API-Kommunikation
-│   │   └── App.tsx
-│   └── package.json
 │
-├── backend/                  # Spring Boot
-│   ├── src/main/java/...
+├── frontend/                              # React + Vite + TypeScript + MUI
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Dashboard.tsx              # Übersichtsseite mit QuickStats
+│   │   │   ├── TaskManagement.tsx         # Hauptseite: Form + Liste (responsive)
+│   │   │   ├── TaskForm.tsx               # Formular zum Erstellen/Bearbeiten
+│   │   │   ├── TaskList.tsx               # Reine Listen-Komponente (Props-basiert)
+│   │   │   ├── QuickStats.tsx             # Dynamische Statistik-Karten
+│   │   │   ├── TaskFormField.tsx          # Wiederverwendbares Eingabefeld
+│   │   │   ├── ValidationErrorDisplay.tsx # Fehleranzeige
+│   │   │   └── Layout.tsx                 # Gemeinsames Layout + Navigation
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useTasks.tsx               # Zentrale Task-State-Verwaltung (useReducer)
+│   │   │   └── useTaskForm.tsx            # Formular-Logik + Validierung (useReducer)
+│   │   │
+│   │   ├── services/
+│   │   │   └── taskService.ts             # API-Kommunikation
+│   │   │
+│   │   ├── App.tsx                        # Einstiegspunkt + Routing + ThemeProvider
+│   │   ├── main.tsx
+│   │   └── index.css
+│   │
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── backend/                               # Spring Boot 3 + Java 21
+│   ├── src/main/java/de/sp/taskmanager/
+│   │   ├── controller/
+│   │   │   └── TaskController.java
+│   │   │
+│   │   ├── model/
+│   │   │   ├── Task.java
+│   │   │   └── TaskStatus.java            # Enum: OPEN, IN_PROGRESS, COMPLETED, BLOCKED
+│   │   │
+│   │   ├── repository/
+│   │   │   └── TaskRepository.java
+│   │   │
+│   │   ├── service/
+│   │   │   └── TaskService.java
+│   │   │
+│   │   ├── init/
+│   │   │   └── DataInitializer.java       # Beispieldaten beim Start
+│   │   │
+│   │   └── TaskManagerApplication.java
+│   │
+│   ├── src/main/resources/
+│   │   ├── application.properties
+│   │   └── data.sql (optional)
+│   │
 │   └── build.gradle
 │
 └── README.md
 ```
-
-## Wichtige Seiten
-
-| Route              | Beschreibung                              |
-|--------------------|-------------------------------------------|
-| `/`                | Dashboard mit Statistiken und Übersicht   |
-| `/tasks`           | Vollständige Task-Verwaltung (Form + Liste) |
 
 ### Voraussetzungen
 - Java 21 (oder höher)
@@ -111,8 +135,8 @@ web-taskmanager/
 Alle Klassen und Konfigurationsdateien enthalten ausführliche Kommentare mit **Good Practices**.
 
 Das Projekt ist bewusst so aufgebaut, dass sowohl Maven als auch Gradle parallel verwendet werden können.
-
-Viel Erfolg beim Nachvollziehen und Erweitern der Anwendung!
+ 
+Falls du Fragen hast oder mitentwickeln möchtest – einfach reinschauen und ausprobieren. Viel Spaß beim Entdecken! 🚀
 
 ---
 
